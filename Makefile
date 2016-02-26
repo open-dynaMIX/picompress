@@ -27,7 +27,7 @@ install:
 	install -d /usr/share/applications
 	install -m644 -t /usr/share/picompress/data/pixmaps src/picompress/data/pixmaps/picompress.png
 	install -m755 src/picompress/picompress.sh /usr/share/picompress/
-	install -m644 data/picompress.desktop /usr/share/applications/
+	install -m644 picompress.desktop /usr/share/applications/
 	ln -sf /usr/share/picompress/picompress.sh /usr/bin/picompress
 	update-desktop-database
 

@@ -44,7 +44,7 @@ parse_args () {
 
     [ $# -eq 1 ] && directory="${1%/}/"
 
-    if ! [ -d "$directory" ]; then
+    if [ -n "$directory" ] && ! [ -d "$directory" ]; then
         echo -e $"$directory is not a directory!" 1>&2
         exit 1
     fi
