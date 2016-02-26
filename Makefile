@@ -23,11 +23,13 @@ test-german:
 
 install:
 	install -d /usr/share/picompress/data/pixmaps/
+	install -d /usr/share/picompress/locale/de/LC_MESSAGES/
 	install -d /usr/bin
 	install -d /usr/share/applications
 	install -m644 -t /usr/share/picompress/data/pixmaps src/picompress/data/pixmaps/picompress.png
 	install -m755 src/picompress/picompress.sh /usr/share/picompress/
 	install -m644 picompress.desktop /usr/share/applications/
+	install -m644 src/picompress/locale/de/LC_MESSAGES/picompress.sh.mo /usr/share/picompress/locale/de/LC_MESSAGES/
 	ln -sf /usr/share/picompress/picompress.sh /usr/bin/picompress
 	update-desktop-database
 
