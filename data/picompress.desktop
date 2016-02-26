@@ -1,0 +1,14 @@
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=picompress
+Name[en_US]=picompress
+GenericName=picompress
+Comment=Shrink and rename images
+Exec=picompress %U
+Terminal=false
+Type=Application
+Icon=/usr/share/picompress/data/pixmaps/picompress.png
+Categories=Graphics;2DGraphics;
+MimeType=inode/directory;
+StartupNotify=false
