@@ -43,4 +43,4 @@ clean:
 cleanall:
 	rm -rf src/picompress/po/de/*.pot src/picompress/po/de/*mo src/picompress/locale/
 
-.PHONY: all po-make po-install po-update pot-extract pot-merge test-german install clean cleanall
+.PHONY: all po-make po-install po-update pot-extract pot-merge test-german install uninstall clean cleanall
