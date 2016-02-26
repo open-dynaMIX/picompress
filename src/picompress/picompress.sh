@@ -99,7 +99,7 @@ fetch_path () {
         start_path="--filename=${HOME}/"
     fi
 
-    directory=$(zenity --file-selection --directory "$start_path" --window-icon="${SCRIPTPATH}"/${APPNAME}.png --text=$"Choose a folder with image-files:" --title="$APPNAME"|cut -d: -f2)
+    directory=$(zenity --file-selection --directory "$start_path" --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"Choose a folder with image-files:" --title="$APPNAME"|cut -d: -f2)
 
     # if the user clicks 'cancel'
     if [[ "$directory" == "/" ]]; then
@@ -112,7 +112,7 @@ fetch_path () {
 }
 
 fetch_comprate () {
-    comprate=$(zenity --scale --value=100 --min-value=1 --text=$"Choose the quality of the image-files in %:" --title=$"$APPNAME - Compression" --window-icon="${SCRIPTPATH}/${APPNAME}".png)
+    comprate=$(zenity --scale --value=100 --min-value=1 --text=$"Choose the quality of the image-files in %:" --title=$"$APPNAME - Compression" --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png")
     if ! [[ -n "$comprate" ]]; then
         exit 0
     fi
@@ -124,7 +124,7 @@ fetch_comprate () {
 
 doyouwantit () {
     picfilescount=${#picfiles[@]}
-    if ! zenity --question --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"There are $picfilescount image-files in $directory.\nDo you want to shrink or rename them?" --title="$APPNAME"; then
+    if ! zenity --question --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"There are $picfilescount image-files in $directory.\nDo you want to shrink or rename them?" --title="$APPNAME"; then
         exit 0
     fi
 }
@@ -142,11 +142,11 @@ Percent: 50%
 Default is 100%"
 
     while true; do
-        if ! geometry=$(zenity --entry --window-icon="${SCRIPTPATH}/${APPNAME}".png --title=$"$APPNAME - Image-size" --text="$text"); then
+        if ! geometry=$(zenity --entry --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --title=$"$APPNAME - Image-size" --text="$text"); then
             exit 0
         fi
         if ! check_geometry "$geometry"; then
-            zenity --error --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"You need to enter a value in percent or pixels!" --title=$"$APPNAME - Error!"
+            zenity --error --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"You need to enter a value in percent or pixels!" --title=$"$APPNAME - Error!"
             continue
         else
             if ! [[ -n $geometry ]]; then
@@ -163,14 +163,14 @@ Default is 100%"
 }
 
 wannarename () {
-    if ! zenity --question --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"Do you want to rename the images, according to the timestamp in the EXIF-header (the time you've taken the picture)?\nThis works only for \*.jpg-files." --title="$APPNAME"; then
+    if ! zenity --question --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"Do you want to rename the images, according to the timestamp in the EXIF-header (the time you've taken the picture)?\nThis works only for \*.jpg-files." --title="$APPNAME"; then
         return 1
     fi
 }
 
 fetch_rename () {
     while true; do
-        if ! rename=$(zenity --entry --window-icon="${SCRIPTPATH}/${APPNAME}".png --title=$"$APPNAME - Rename images" --text=$"\
+        if ! rename=$(zenity --entry --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --title=$"$APPNAME - Rename images" --text=$"\
 %H Hour in 24-hour format (00 - 23)
 %j Day of year as decimal number (001 - 366)
 %m Month as decimal number (01 - 12)
@@ -253,7 +253,7 @@ dep_check convert imagemagick
 
 if ! [ -n "$directory" ]; then
     # Welcome
-    if ! zenity --info --title="$APPNAME" --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"$APPNAME\n\nChoose a folder with \*.jpg- and/or \*.png-files to process."; then
+    if ! zenity --info --title="$APPNAME" --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"$APPNAME\n\nChoose a folder with \*.jpg- and/or \*.png-files to process."; then
         exit 0
     fi
 fi
@@ -270,7 +270,7 @@ while true; do
     collect_filenames "$directory"
 
     if ! [[ -n "${picfiles[@]}" ]]; then
-        zenity --info --window-icon="${SCRIPTPATH}/${APPNAME}".png --title=$"$APPNAME - Error!" --text=$"The folder $directory contains no \*.jpg- or \*.png-files."
+        zenity --info --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --title=$"$APPNAME - Error!" --text=$"The folder $directory contains no \*.jpg- or \*.png-files."
         unset directory
         continue
     fi
@@ -300,13 +300,13 @@ while true; do
     fi
 
     if [[ $doconvert == false ]] && [[ $dorenaming == false ]]; then
-        zenity --error --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"Your settings won't change anything on the images!" --title=$"$APPNAME - Error!"
+        zenity --error --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"Your settings won't change anything on the images!" --title=$"$APPNAME - Error!"
         continue
     fi
 
     if [[ $dorenaming == true ]]; then
         if [ ${#picfilesjpg[@]} -eq 0 ]; then
-            zenity --error --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"There are no *.jpg-files in $directory.\nRenaming only works on them!" --title=$"$APPNAME - Error!"
+            zenity --error --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"There are no *.jpg-files in $directory.\nRenaming only works on them!" --title=$"$APPNAME - Error!"
             continue
         fi
     fi
@@ -335,17 +335,17 @@ while true; do
         percent=$(echo "$percent"+"$percentorig" | bc)
         let fileof=fileof+1
     done
-    ) | zenity --progress --auto-close --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"$picfilescount image-files are about to get shrinked and/or renamed." --title="$APPNAME" --percentage=0
+    ) | zenity --progress --auto-close --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"$picfilescount image-files are about to get shrinked and/or renamed." --title="$APPNAME" --percentage=0
 
     if [ $? -ne 0 ]; then
       exit 1
     fi
 
     if [ "$(echo "$error_text" | wc -l)" -gt 2 ]; then
-        zenity --error --window-icon="${SCRIPTPATH}/${APPNAME}".png --text="$error_text" --title=$"$APPNAME - Error!"
+        zenity --error --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text="$error_text" --title=$"$APPNAME - Error!"
         exit 1
     else
-        if zenity --question --window-icon="${SCRIPTPATH}/${APPNAME}".png --text=$"$picfilescount image-files were successfully processed.\nDo you want to shrink or rename other images?" --title=$"$APPNAME - Success!"; then
+        if zenity --question --window-icon="${SCRIPTPATH}/data/pixmaps/${APPNAME}.png" --text=$"$picfilescount image-files were successfully processed.\nDo you want to shrink or rename other images?" --title=$"$APPNAME - Success!"; then
             continue 2
         else
             exit 0
