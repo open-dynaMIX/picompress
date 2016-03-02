@@ -22,7 +22,7 @@ either in percent or pixels.
 This can be very usefull, when sending images over the internet.
 
 ###Rename images
-You can set a pattern (strftime) for renaming the images. This will also set
+You can set a pattern (strftime) for renaming the images according to the timestamp in the EXIF-header. This will also set
 the file's system time stamp. There is a sane default pattern consisting of 
 date and time.
 
